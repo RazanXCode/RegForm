@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Register</h2>
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Full Name">
+        <span id="nameError" class="error"></span>
+
+        <input type="email" id="email" placeholder="Email">
+        <span id="emailError" class="error"></span>
+
+        <input type="password" id="password" placeholder="Password">
+        <span id="passwordError" class="error"></span>
+
+        <button id="submit" type="submit">Submit</button>
+
+    </form>
+
+
+    <button id="fetchUsersBtn" type="submit">Fetch User Data</button>
+
+    <ul id="userList"></ul>
+
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            let isValid = true;
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            // Clear previous errors
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("emailError").innerText = "";
+            document.getElementById("passwordError").innerText = "";
+
+            //Name Validation
+            if (name === "") {
+                document.getElementById("nameError").innerText = "Name is required";
+                isValid = false;
+            }
+
+            // Email Validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") {
+                document.getElementById("emailError").innerText = "Email is required";
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerText = "Invalid email format";
+                isValid = false;
+            }
+
+            // Password Validation
+            let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;;
+            if (password === "") {
+                document.getElementById("passwordError").innerText = "Password is required";
+                isValid = false;
+            } else if (!passwordPattern.test(password)) {
+                document.getElementById("passwordError").innerText = "Password must be at least 8 characters, with letters , numbers and special characters";
+                isValid = false;
+            }
+
+            // Form Submition
+            if (isValid) {
+                alert("Form submitted successfully!");
+                this.submit();
+            }
+        });
+
+
+
+
+        let fetchButton = document.getElementById("fetchUsersBtn");
+        let userList = document.getElementById("userList");
+        
+        
+
+        const getUsers = async () => {
+            fetchButton.disabled = true;
+
+            try {
+                let response = await fetch("https://jsonplaceholder.typicode.com/users");
+                let users = await response.json();
+
+                userList.innerHTML = "";
+                users.forEach(user => {
+                    let listItem = document.createElement("li");
+                    listItem.classList.add("list-group-item");
+                    listItem.innerHTML = `<strong>${user.name}</strong> - ${user.email}`;
+                    userList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+
+            fetchText.textContent = "View Users";
+        };
+
+        fetchButton.addEventListener("click", getUsers);
+
+
+    </script>
+
+</body>
+
+</html>

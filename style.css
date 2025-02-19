@@ -1,0 +1,105 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dbdbeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1000px;
+    margin: 0;
+}
+
+h2{
+position: relative;
+bottom:200px;
+left:300px;
+}
+/* Centered Container */
+.container {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input {
+    width: 300px;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 3px;
+}
+
+/* Button Styling */
+button {
+    display:block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#fetchUsers{
+    width:350px ;
+    position: relative;
+    top:300px;
+    right:380px;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#userList{
+    position: relative;
+    top:500px;
+    right:700px;
+    padding: 10px;
+    margin-top: 15px;
+
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Loading Text */
+.loading {
+    top:500px;
+    right:700px;
+    display: none;
+    position:relative;
+    color: blue;
+    font-weight: bold;
+    margin-top: 10px;
+}
